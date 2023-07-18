@@ -4,9 +4,9 @@ import com.example.bankappspringboot.auth.model.response.AuthResponse;
 import com.example.bankappspringboot.auth.service.AuthService;
 import com.example.bankappspringboot.auth.domain.UserEntity;
 import com.example.bankappspringboot.auth.model.request.AuthRequest;
+import com.example.bankappspringboot.auth.utils.AuthenticationUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthController {
   private final AuthService authService;
+  private final AuthenticationUtils authenticationUtils;
+
 
   @PostMapping("/register")
   public ResponseEntity<UserEntity> registerUser(@RequestBody UserEntity userEntity) {
@@ -27,8 +29,8 @@ public class AuthController {
   }
 
   @GetMapping("/test")
-  public ResponseEntity<String> testMethod(Authentication authentication) {
-    return authService.testLoggedUserName(authentication);
+  public ResponseEntity<String> testMethod() {
+    return authService.testLoggedUserName(authenticationUtils.getCurrentUserInfo());
   }
 
 }

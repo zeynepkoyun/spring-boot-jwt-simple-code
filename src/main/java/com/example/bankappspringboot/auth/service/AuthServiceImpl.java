@@ -5,6 +5,7 @@ import com.example.bankappspringboot.auth.model.request.AuthRequest;
 import com.example.bankappspringboot.auth.model.response.AuthResponse;
 import com.example.bankappspringboot.auth.model.response.TestAuthResponse;
 import com.example.bankappspringboot.auth.repository.UserRepository;
+import com.example.bankappspringboot.auth.utils.AuthenticationUtils;
 import com.example.bankappspringboot.security.JwtUtilities;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ public class AuthServiceImpl implements AuthService{
   private BCryptPasswordEncoder bCryptPasswordEncoder;
   private AuthenticationManager authenticationManager;
   private JwtUtilities jwtUtilities;
+  private final AuthenticationUtils authenticationUtils;
 
   @Override
   public ResponseEntity<UserEntity> registerUser(UserEntity userEntity) {
@@ -55,9 +57,8 @@ public class AuthServiceImpl implements AuthService{
   }
 
   @Override
-  public ResponseEntity<String> testLoggedUserName(Authentication authentication) {
-    String username = ((UserEntity)authentication.getPrincipal()).getName();
-    TestAuthResponse testAuthResponse = TestAuthResponse.builder().username(username).build();
+  public ResponseEntity<String> testLoggedUserName(UserEntity loggedUserInfo) {
+    TestAuthResponse testAuthResponse = TestAuthResponse.builder().username(loggedUserInfo.getName()).build();
     return ResponseEntity.ok(testAuthResponse.message());
   }
 }

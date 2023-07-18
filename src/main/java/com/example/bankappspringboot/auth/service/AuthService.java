@@ -4,7 +4,6 @@ import com.example.bankappspringboot.auth.domain.UserEntity;
 import com.example.bankappspringboot.auth.model.request.AuthRequest;
 import com.example.bankappspringboot.auth.model.response.AuthResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 
 public interface AuthService {
 
@@ -12,5 +11,5 @@ public interface AuthService {
 
   ResponseEntity<AuthResponse> loginUser(AuthRequest authRequest);
 
-  ResponseEntity<String> testLoggedUserName(Authentication authentication);
+  ResponseEntity<String> testLoggedUserName(UserEntity userEntity);
 }
