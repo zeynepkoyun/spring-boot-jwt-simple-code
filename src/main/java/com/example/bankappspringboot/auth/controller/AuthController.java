@@ -1,9 +1,10 @@
 package com.example.bankappspringboot.auth.controller;
 
-import com.example.bankappspringboot.auth.model.response.AuthResponse;
-import com.example.bankappspringboot.auth.service.AuthService;
+
 import com.example.bankappspringboot.auth.domain.UserEntity;
 import com.example.bankappspringboot.auth.model.request.AuthRequest;
+import com.example.bankappspringboot.auth.model.response.AuthResponse;
+import com.example.bankappspringboot.auth.service.AuthService;
 import com.example.bankappspringboot.auth.utils.AuthenticationUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class AuthController {
 
   @GetMapping("/test")
   public ResponseEntity<String> testMethod() {
-    return authService.testLoggedUserName(authenticationUtils.getCurrentUserInfo());
+    return authService.testLoggedUserName(authenticationUtils.getCurrentUserId());
   }
 
 }

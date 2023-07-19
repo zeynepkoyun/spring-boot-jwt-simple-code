@@ -1,6 +1,6 @@
 package com.example.bankappspringboot.auth.utils;
 
-import com.example.bankappspringboot.auth.domain.UserEntity;
+import com.example.bankappspringboot.security.UserDetailsImpl;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -12,10 +12,11 @@ public class AuthenticationUtils {
     return SecurityContextHolder.getContext().getAuthentication();
   }
 
-  public UserEntity getCurrentUserInfo() {
+  public Long getCurrentUserId() {
     Authentication authentication = getAuthentication();
+    System.out.println(authentication + " geldi");
     if (authentication != null && authentication.isAuthenticated()) {
-      return ((UserEntity) authentication.getPrincipal());
+      return ((UserDetailsImpl) authentication.getPrincipal()).getUserId();
     }
     return null;
   }

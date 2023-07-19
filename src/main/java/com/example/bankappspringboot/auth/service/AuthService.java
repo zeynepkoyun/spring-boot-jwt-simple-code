@@ -1,5 +1,6 @@
 package com.example.bankappspringboot.auth.service;
 
+
 import com.example.bankappspringboot.auth.domain.UserEntity;
 import com.example.bankappspringboot.auth.model.request.AuthRequest;
 import com.example.bankappspringboot.auth.model.response.AuthResponse;
@@ -11,5 +12,5 @@ public interface AuthService {
 
   ResponseEntity<AuthResponse> loginUser(AuthRequest authRequest);
 
-  ResponseEntity<String> testLoggedUserName(UserEntity userEntity);
+  ResponseEntity<String> testLoggedUserName(Long userId);
 }
